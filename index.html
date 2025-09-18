@@ -652,25 +652,28 @@
         });
 
         function playVideo() {
-            // This function can be used to play your uploaded video
-            //alert('Here you can add your video file (.mp4) and implement the video player functionality');
-            // Example: Replace the placeholder with an actual video element
-             const videoContainer = document.querySelector('.video-placeholder');
-             videoContainer.innerHTML = '<video controls width="100%"><source src="images/video_sub2.mp4" type="video/mp4"></video>';
+            const videoContainer = document.querySelector('.video-placeholder');
 
-             // Get the video element and play it immediately
+            // Sostituisco il placeholder con il video
+            videoContainer.innerHTML = `
+                <video id="hospitalVideo" controls width="100%">
+                    <source src="images/video_sub2.mp4" type="video/mp4">
+                    Il tuo browser non supporta il tag video.
+                </video>
+            `;
+
             const video = document.getElementById('hospitalVideo');
-            
-            // Ensure the video plays
+
+            // Prova a far partire subito il video
             video.play().catch(error => {
-                console.log('Autoplay prevented by browser:', error);
-                // Fallback: show a message if autoplay is blocked
+                console.log('Autoplay bloccato dal browser:', error);
+                // Se autoplay è bloccato, mostro i controlli
                 video.setAttribute('controls', 'true');
             });
-            
-            // Optional: Add event listener for when video ends
+
+            // Eventuale callback a fine riproduzione
             video.addEventListener('ended', function() {
-                console.log('Video finished playing');
+                console.log('Video terminato');
             });
         }
 
